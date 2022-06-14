@@ -1,0 +1,21 @@
+{
+  "/_app": "pages/_app.js",
+  "/api/config/dbConfig": "pages/api/config/dbConfig.js",
+  "/api/controllers/paymentController": "pages/api/controllers/paymentController.js",
+  "/api/controllers/userController": "pages/api/controllers/userController.js",
+  "/api/middleware/authentication": "pages/api/middleware/authentication.js",
+  "/api/models": "pages/api/models.js",
+  "/api/models/paymentModel": "pages/api/models/paymentModel.js",
+  "/api/models/userModel": "pages/api/models/userModel.js",
+  "/api/routes/userRouter": "pages/api/routes/userRouter.js",
+  "/api/server": "pages/api/server.js",
+  "/api/utils/passConfig": "pages/api/utils/passConfig.js",
+  "/api/utils/sk": "pages/api/utils/sk.js",
+  "/dashboard": "pages/dashboard.html",
+  "/history": "pages/history.html",
+  "/": "pages/index.html",
+  "/login": "pages/login.html",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/404": "pages/404.html"
+}

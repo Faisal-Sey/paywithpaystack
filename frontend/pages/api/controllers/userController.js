@@ -1,9 +1,9 @@
-import { user } from "../models"
+import db from "../models"
 import { hashPassword, comparePass } from "../utils/passConfig"
 
 
 // create main Model
-const User = user
+export const User = db.user
 
 
 // create user

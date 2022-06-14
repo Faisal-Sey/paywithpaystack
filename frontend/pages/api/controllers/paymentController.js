@@ -1,10 +1,10 @@
-import { payment } from '../models'
+import db from '../models'
 import axios from 'axios'
 import { SECRET_KEY } from '../utils/sk'
 
 
 
-export const Payment = payment
+export const Payment = db.payment
 
 export const verifyPayment = async(req, res) => {
 
