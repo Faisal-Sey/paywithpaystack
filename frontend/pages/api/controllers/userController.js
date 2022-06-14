@@ -7,7 +7,7 @@ const User = _user
 
 
 // create user
-const register = async (req, res) => {
+export const register = async (req, res) => {
 
 
   let info = {
@@ -19,11 +19,10 @@ const register = async (req, res) => {
 
   const user = await User.create(info)
   res.status(200).send(user)
-  console.log(user)
 }
 
 
-const login = async (req, res) => {
+export const login = async (req, res) => {
   
 
   let info = {
@@ -31,18 +30,13 @@ const login = async (req, res) => {
     password: req.body.password,
   }
 
-  console.log(info.username)
-  console.log(info.password)
-
   const user = await User.findOne({ where: { username: info.username }})
-  console.log(user)
   if (comparePass(info.password, user.password)) {res.status(200).send(user)}
-  console.log(user)
 }
 
 
 // All Users
-const getUsers = async(req, res) => {
+export const getUsers = async(req, res) => {
 
   let users = await User.findAll({
     attributes: [
@@ -57,7 +51,7 @@ const getUsers = async(req, res) => {
 }
 
 // One User
-const getUser = async(req, res) => {
+export const getUser = async(req, res) => {
 
   let id = req.params.id
   let user = await User.findOne({ where: {id: id} })
@@ -66,7 +60,7 @@ const getUser = async(req, res) => {
 }
 
 // Delete User
-const deleteUser = async(req, res) => {
+export const deleteUser = async(req, res) => {
 
   let id = req.params.id
   await User.destroy({ where: {id: id} })
@@ -76,7 +70,7 @@ const deleteUser = async(req, res) => {
 
 
 // Change User
-const changePassword = async(req, res) => {
+export const changePassword = async(req, res) => {
 
   let info = {
     username: req.body.username,
@@ -91,16 +85,6 @@ const changePassword = async(req, res) => {
 
 }
 
-
-// exports
-export default {
-  register,
-  login,
-  getUser,
-  getUsers,
-  deleteUser,
-  changePassword,
-}
 
 
 

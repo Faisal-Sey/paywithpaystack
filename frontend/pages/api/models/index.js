@@ -33,8 +33,8 @@ const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
-db.user = require("./userModel.js")(sequelize, DataTypes)
-db.payment = require("./paymentModel.js")(sequelize, DataTypes)
+db.user = require("./userModel.js").default(sequelize, DataTypes)
+db.payment = require("./paymentModel.js").default(sequelize, DataTypes)
 
 db.sequelize.sync({ force: false })
   .then(() => {
@@ -42,4 +42,4 @@ db.sequelize.sync({ force: false })
   })
 
 
-  export default db;
+export default db;

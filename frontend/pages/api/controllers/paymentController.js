@@ -6,9 +6,9 @@ import { SECRET_KEY } from '../utils/sk'
 
 
 
-const Payment = _payment
+export const Payment = _payment
 
-const verifyPayment = async(req, res) => {
+export const verifyPayment = async(req, res) => {
 
   let info = {
     email: req.body.email,
@@ -46,7 +46,7 @@ const verifyPayment = async(req, res) => {
 
 }
 
-const getAllPayments = async(req, res) => {
+export const getAllPayments = async(req, res) => {
 
   let payments = await Payment.findAll({
     attributes: [
@@ -61,9 +61,4 @@ const getAllPayments = async(req, res) => {
 
   res.status(200).send(payments)
 
-}
-
-export default {
-  verifyPayment,
-  getAllPayments,
 }
