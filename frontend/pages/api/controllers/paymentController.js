@@ -1,9 +1,7 @@
 
-const { payment } = require('../models')
 const db = require('../models')
 const axios = require('axios').default
 const SECRET_KEY = require('../utils/sk').SECRET_KEY
-console.log(SECRET_KEY)
 
 
 const Payment = db.payment

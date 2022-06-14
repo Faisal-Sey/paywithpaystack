@@ -15,7 +15,7 @@ module.exports = require("axios");
 /***/ 496:
 /***/ ((module) => {
 
-module.exports = require("sequelize");
+module.exports = require();
 
 /***/ })
 
