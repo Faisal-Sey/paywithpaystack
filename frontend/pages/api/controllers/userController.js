@@ -1,9 +1,9 @@
-const db = require("../models")
-const passConfig = require("../utils/passConfig")
+import { user as _user } from "../models"
+import { hashPassword, comparePass } from "../utils/passConfig"
 
 
 // create main Model
-const User = db.user
+const User = _user
 
 
 // create user
@@ -12,7 +12,7 @@ const register = async (req, res) => {
 
   let info = {
     username: req.body.username,
-    password: passConfig.hashPassword(req.body.password),
+    password: hashPassword(req.body.password),
     first_name: req.body.first_name,
     last_name: req.body.last_name,
   }
@@ -36,7 +36,7 @@ const login = async (req, res) => {
 
   const user = await User.findOne({ where: { username: info.username }})
   console.log(user)
-  if (passConfig.comparePass(info.password, user.password)) {res.status(200).send(user)}
+  if (comparePass(info.password, user.password)) {res.status(200).send(user)}
   console.log(user)
 }
 
@@ -83,7 +83,7 @@ const changePassword = async(req, res) => {
     password: req.body.password,
   } 
   let user = await User.update(
-    { password: passConfig.hashPassword(info.password) }, 
+    { password: hashPassword(info.password) }, 
     { where: { username: info.username } }
   )
 
@@ -93,7 +93,7 @@ const changePassword = async(req, res) => {
 
 
 // exports
-module.exports = {
+export default {
   register,
   login,
   getUser,

@@ -1,22 +1,22 @@
 
-const userController = require("../controllers/userController")
-const paymentController = require("../controllers/paymentController")
+import { register, login, changePassword, getUsers, getUser, deleteUser } from "../controllers/userController"
+import { verifyPayment, getAllPayments } from "../controllers/paymentController"
 
 
 const router = require("express").Router()
 
 // user
-router.post('/register', userController.register)
-router.post('/login', userController.login)
-router.post('/change_password', userController.changePassword)
-router.get('/users', userController.getUsers)
-router.get('/user/:id', userController.getUser)
-router.delete('/user/:id', userController.deleteUser)
+router.post('/register', register)
+router.post('/login', login)
+router.post('/change_password', changePassword)
+router.get('/users', getUsers)
+router.get('/user/:id', getUser)
+router.delete('/user/:id', deleteUser)
 
 // payments
-router.post('/verify_payment', paymentController.verifyPayment)
-router.get('/payments', paymentController.getAllPayments)
+router.post('/verify_payment', verifyPayment)
+router.get('/payments', getAllPayments)
 
 
 
-module.exports = router
+export default router

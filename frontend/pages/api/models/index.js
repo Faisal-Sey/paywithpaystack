@@ -1,21 +1,21 @@
 
-const dbConfig = require("../config/dbConfig")
+import { DB, USER, PASSWORD, HOST, dialect as _dialect, pool as _pool } from "../config/dbConfig"
 
-const { Sequelize, DataTypes } = require("sequelize")
+import { Sequelize, DataTypes } from "sequelize"
 
 const sequelize = new Sequelize(
-  dbConfig.DB,
-  dbConfig.USER,
-  dbConfig.PASSWORD, {
-    host: dbConfig.HOST,
-    dialect: dbConfig.dialect,
+  DB,
+  USER,
+  PASSWORD, {
+    host: HOST,
+    dialect: _dialect,
     operatorsAliases: false,
 
     pool: {
-      max: dbConfig.pool.max,
-      min: dbConfig.pool.min,
-      acquire: dbConfig.pool.acquire,
-      idle: dbConfig.pool.idle,
+      max: _pool.max,
+      min: _pool.min,
+      acquire: _pool.acquire,
+      idle: _pool.idle,
     }
   }
 )
@@ -42,4 +42,4 @@ db.sequelize.sync({ force: false })
   })
 
 
-  module.exports = db;
+  export default db;

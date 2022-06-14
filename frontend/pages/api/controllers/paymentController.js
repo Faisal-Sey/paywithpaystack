@@ -1,12 +1,12 @@
 
-const { payment } = require('../models')
-const db = require('../models')
-const axios = require('axios').default
-const SECRET_KEY = require('../utils/sk').SECRET_KEY
-console.log(SECRET_KEY)
+import { payment } from '../models'
+import { payment as _payment } from '../models'
+import axios from 'axios'
+import { SECRET_KEY } from '../utils/sk'
 
 
-const Payment = db.payment
+
+const Payment = _payment
 
 const verifyPayment = async(req, res) => {
 
@@ -63,7 +63,7 @@ const getAllPayments = async(req, res) => {
 
 }
 
-module.exports = {
+export default {
   verifyPayment,
   getAllPayments,
 }
