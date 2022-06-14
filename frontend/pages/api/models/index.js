@@ -1,23 +1,21 @@
 
-import { DB, USER, PASSWORD, HOST, dialect as _dialect, pool as _pool } from "../config/dbConfig"
+const dbConfig = require("../config/dbConfig")
 
-import { Sequelize, DataTypes } from "sequelize"
-import paymentModel from "./paymentModel.js"
-import userModel from "./userModel.js"
+const { Sequelize, DataTypes } = require("sequelize")
 
 const sequelize = new Sequelize(
-  DB,
-  USER,
-  PASSWORD, {
-    host: HOST,
-    dialect: _dialect,
+  dbConfig.DB,
+  dbConfig.USER,
+  dbConfig.PASSWORD, {
+    host: dbConfig.HOST,
+    dialect: dbConfig.dialect,
     operatorsAliases: false,
 
     pool: {
-      max: _pool.max,
-      min: _pool.min,
-      acquire: _pool.acquire,
-      idle: _pool.idle,
+      max: dbConfig.pool.max,
+      min: dbConfig.pool.min,
+      acquire: dbConfig.pool.acquire,
+      idle: dbConfig.pool.idle,
     }
   }
 )
@@ -35,8 +33,8 @@ const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
-db.user = userModel(sequelize, DataTypes)
-db.payment = paymentModel(sequelize, DataTypes)
+db.user = require("./userModel.js")(sequelize, DataTypes)
+db.payment = require("./paymentModel.js")(sequelize, DataTypes)
 
 db.sequelize.sync({ force: false })
   .then(() => {
@@ -44,4 +42,4 @@ db.sequelize.sync({ force: false })
   })
 
 
-export default db;
+  module.exports = db;

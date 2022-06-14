@@ -26,42 +26,32 @@ module.exports = require("express");
 
 /***/ }),
 
-/***/ 8210:
+/***/ 496:
 /***/ ((module) => {
 
-module.exports = import("sequelize");;
+module.exports = require("sequelize");
 
 /***/ }),
 
 /***/ 99:
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _controllers_userController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1340);
-/* harmony import */ var _controllers_paymentController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9608);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_controllers_userController__WEBPACK_IMPORTED_MODULE_0__, _controllers_paymentController__WEBPACK_IMPORTED_MODULE_1__]);
-([_controllers_userController__WEBPACK_IMPORTED_MODULE_0__, _controllers_paymentController__WEBPACK_IMPORTED_MODULE_1__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 
+const userController = __webpack_require__(1340);
+const paymentController = __webpack_require__(9608);
 const router = (__webpack_require__(6860).Router)();
 // user
-router.post("/register", _controllers_userController__WEBPACK_IMPORTED_MODULE_0__.register);
-router.post("/login", _controllers_userController__WEBPACK_IMPORTED_MODULE_0__.login);
-router.post("/change_password", _controllers_userController__WEBPACK_IMPORTED_MODULE_0__.changePassword);
-router.get("/users", _controllers_userController__WEBPACK_IMPORTED_MODULE_0__.getUsers);
-router.get("/user/:id", _controllers_userController__WEBPACK_IMPORTED_MODULE_0__.getUser);
-router.delete("/user/:id", _controllers_userController__WEBPACK_IMPORTED_MODULE_0__.deleteUser);
+router.post("/register", userController.register);
+router.post("/login", userController.login);
+router.post("/change_password", userController.changePassword);
+router.get("/users", userController.getUsers);
+router.get("/user/:id", userController.getUser);
+router.delete("/user/:id", userController.deleteUser);
 // payments
-router.post("/verify_payment", _controllers_paymentController__WEBPACK_IMPORTED_MODULE_1__.verifyPayment);
-router.get("/payments", _controllers_paymentController__WEBPACK_IMPORTED_MODULE_1__.getAllPayments);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
+router.post("/verify_payment", paymentController.verifyPayment);
+router.get("/payments", paymentController.getAllPayments);
+module.exports = router;
 
-__webpack_async_result__();
-} catch(e) { __webpack_async_result__(e); } });
 
 /***/ })
 

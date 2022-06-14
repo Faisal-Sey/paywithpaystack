@@ -4,51 +4,42 @@ exports.ids = [340];
 exports.modules = {
 
 /***/ 1340:
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "User": () => (/* binding */ User),
-/* harmony export */   "register": () => (/* binding */ register),
-/* harmony export */   "login": () => (/* binding */ login),
-/* harmony export */   "getUsers": () => (/* binding */ getUsers),
-/* harmony export */   "getUser": () => (/* binding */ getUser),
-/* harmony export */   "deleteUser": () => (/* binding */ deleteUser),
-/* harmony export */   "changePassword": () => (/* binding */ changePassword)
-/* harmony export */ });
-/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7421);
-/* harmony import */ var _utils_passConfig__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(386);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_models__WEBPACK_IMPORTED_MODULE_0__]);
-_models__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 
+const db = __webpack_require__(7421);
+const passConfig = __webpack_require__(386);
 // create main Model
-const User = _models__WEBPACK_IMPORTED_MODULE_0__["default"].user;
+const User = db.user;
 // create user
 const register = async (req, res)=>{
     let info = {
         username: req.body.username,
-        password: (0,_utils_passConfig__WEBPACK_IMPORTED_MODULE_1__.hashPassword)(req.body.password),
+        password: passConfig.hashPassword(req.body.password),
         first_name: req.body.first_name,
         last_name: req.body.last_name
     };
     const user = await User.create(info);
     res.status(200).send(user);
+    console.log(user);
 };
 const login = async (req, res)=>{
     let info = {
         username: req.body.username,
         password: req.body.password
     };
+    console.log(info.username);
+    console.log(info.password);
     const user = await User.findOne({
         where: {
             username: info.username
         }
     });
-    if ((0,_utils_passConfig__WEBPACK_IMPORTED_MODULE_1__.comparePass)(info.password, user.password)) {
+    console.log(user);
+    if (passConfig.comparePass(info.password, user.password)) {
         res.status(200).send(user);
     }
+    console.log(user);
 };
 // All Users
 const getUsers = async (req, res)=>{
@@ -89,7 +80,7 @@ const changePassword = async (req, res)=>{
         password: req.body.password
     };
     let user = await User.update({
-        password: (0,_utils_passConfig__WEBPACK_IMPORTED_MODULE_1__.hashPassword)(info.password)
+        password: passConfig.hashPassword(info.password)
     }, {
         where: {
             username: info.username
@@ -97,30 +88,35 @@ const changePassword = async (req, res)=>{
     });
     res.status(200).send("Password Changed Successfully");
 };
+// exports
+module.exports = {
+    register,
+    login,
+    getUser,
+    getUsers,
+    deleteUser,
+    changePassword
+};
 
-__webpack_async_result__();
-} catch(e) { __webpack_async_result__(e); } });
 
 /***/ }),
 
 /***/ 386:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "hashPassword": () => (/* binding */ hashPassword),
-/* harmony export */   "comparePass": () => (/* binding */ comparePass)
-/* harmony export */ });
-/* harmony import */ var bcryptjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8432);
-/* harmony import */ var bcryptjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bcryptjs__WEBPACK_IMPORTED_MODULE_0__);
 
+const bcrypt = __webpack_require__(8432);
 const hashPassword = (password)=>{
-    let salt = (0,bcryptjs__WEBPACK_IMPORTED_MODULE_0__.genSaltSync)(10);
-    let hash = (0,bcryptjs__WEBPACK_IMPORTED_MODULE_0__.hashSync)(password, salt);
+    let salt = bcrypt.genSaltSync(10);
+    let hash = bcrypt.hashSync(password, salt);
     return hash;
 };
 const comparePass = (info_password, user_password)=>{
-    return (0,bcryptjs__WEBPACK_IMPORTED_MODULE_0__.compareSync)(info_password, user_password);
+    return bcrypt.compareSync(info_password, user_password);
+};
+module.exports = {
+    hashPassword,
+    comparePass
 };
 
 

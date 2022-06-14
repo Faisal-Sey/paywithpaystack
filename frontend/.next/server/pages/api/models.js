@@ -5,10 +5,10 @@ exports.id = 327;
 exports.ids = [327];
 exports.modules = {
 
-/***/ 8210:
+/***/ 496:
 /***/ ((module) => {
 
-module.exports = import("sequelize");;
+module.exports = require("sequelize");
 
 /***/ })
 

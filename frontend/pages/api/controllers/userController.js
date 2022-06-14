@@ -1,28 +1,29 @@
-import db from "../models"
-import { hashPassword, comparePass } from "../utils/passConfig"
+const db = require("../models")
+const passConfig = require("../utils/passConfig")
 
 
 // create main Model
-export const User = db.user
+const User = db.user
 
 
 // create user
-export const register = async (req, res) => {
+const register = async (req, res) => {
 
 
   let info = {
     username: req.body.username,
-    password: hashPassword(req.body.password),
+    password: passConfig.hashPassword(req.body.password),
     first_name: req.body.first_name,
     last_name: req.body.last_name,
   }
 
   const user = await User.create(info)
   res.status(200).send(user)
+  console.log(user)
 }
 
 
-export const login = async (req, res) => {
+const login = async (req, res) => {
   
 
   let info = {
@@ -30,13 +31,18 @@ export const login = async (req, res) => {
     password: req.body.password,
   }
 
+  console.log(info.username)
+  console.log(info.password)
+
   const user = await User.findOne({ where: { username: info.username }})
-  if (comparePass(info.password, user.password)) {res.status(200).send(user)}
+  console.log(user)
+  if (passConfig.comparePass(info.password, user.password)) {res.status(200).send(user)}
+  console.log(user)
 }
 
 
 // All Users
-export const getUsers = async(req, res) => {
+const getUsers = async(req, res) => {
 
   let users = await User.findAll({
     attributes: [
@@ -51,7 +57,7 @@ export const getUsers = async(req, res) => {
 }
 
 // One User
-export const getUser = async(req, res) => {
+const getUser = async(req, res) => {
 
   let id = req.params.id
   let user = await User.findOne({ where: {id: id} })
@@ -60,7 +66,7 @@ export const getUser = async(req, res) => {
 }
 
 // Delete User
-export const deleteUser = async(req, res) => {
+const deleteUser = async(req, res) => {
 
   let id = req.params.id
   await User.destroy({ where: {id: id} })
@@ -70,14 +76,14 @@ export const deleteUser = async(req, res) => {
 
 
 // Change User
-export const changePassword = async(req, res) => {
+const changePassword = async(req, res) => {
 
   let info = {
     username: req.body.username,
     password: req.body.password,
   } 
   let user = await User.update(
-    { password: hashPassword(info.password) }, 
+    { password: passConfig.hashPassword(info.password) }, 
     { where: { username: info.username } }
   )
 
@@ -85,6 +91,16 @@ export const changePassword = async(req, res) => {
 
 }
 
+
+// exports
+module.exports = {
+  register,
+  login,
+  getUser,
+  getUsers,
+  deleteUser,
+  changePassword,
+}
 
 
 

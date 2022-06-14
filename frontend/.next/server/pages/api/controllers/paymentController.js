@@ -12,10 +12,10 @@ module.exports = require("axios");
 
 /***/ }),
 
-/***/ 8210:
+/***/ 496:
 /***/ ((module) => {
 
-module.exports = import("sequelize");;
+module.exports = require("sequelize");
 
 /***/ })
 

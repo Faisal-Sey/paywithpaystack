@@ -1,5 +1,5 @@
-import express, { json, urlencoded } from 'express'
-import cors from 'cors'
+const express = require('express')
+const cors = require('cors')
 
 
 const app = express()
@@ -12,14 +12,14 @@ const corOptions = {
 // middlewares
 app.use(cors(corOptions))
 
-app.use(json())
+app.use(express.json())
 
-app.use(urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }))
 
 
 // routers
 
-import router from './routes/userRouter'
+const router = require('./routes/userRouter')
 app.use('/api', router)
 
 // testing api
@@ -31,10 +31,10 @@ app.get("/", (req, res) => {
 
 // port
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 8888
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
 } )
 
-export default app
+module.exports = app

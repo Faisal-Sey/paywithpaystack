@@ -1,12 +1,14 @@
-import db from '../models'
-import axios from 'axios'
-import { SECRET_KEY } from '../utils/sk'
+
+const { payment } = require('../models')
+const db = require('../models')
+const axios = require('axios').default
+const SECRET_KEY = require('../utils/sk').SECRET_KEY
+console.log(SECRET_KEY)
 
 
+const Payment = db.payment
 
-export const Payment = db.payment
-
-export const verifyPayment = async(req, res) => {
+const verifyPayment = async(req, res) => {
 
   let info = {
     email: req.body.email,
@@ -44,7 +46,7 @@ export const verifyPayment = async(req, res) => {
 
 }
 
-export const getAllPayments = async(req, res) => {
+const getAllPayments = async(req, res) => {
 
   let payments = await Payment.findAll({
     attributes: [
@@ -59,4 +61,9 @@ export const getAllPayments = async(req, res) => {
 
   res.status(200).send(payments)
 
+}
+
+module.exports = {
+  verifyPayment,
+  getAllPayments,
 }

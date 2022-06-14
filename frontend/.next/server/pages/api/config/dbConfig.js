@@ -6,27 +6,21 @@ exports.ids = [69];
 exports.modules = {
 
 /***/ 3875:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module) => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "HOST": () => (/* binding */ HOST),
-/* harmony export */   "USER": () => (/* binding */ USER),
-/* harmony export */   "PASSWORD": () => (/* binding */ PASSWORD),
-/* harmony export */   "DB": () => (/* binding */ DB),
-/* harmony export */   "dialect": () => (/* binding */ dialect),
-/* harmony export */   "pool": () => (/* binding */ pool)
-/* harmony export */ });
-const HOST = "localhost";
-const USER = "root";
-const PASSWORD = "Fulerasey@123";
-const DB = "user_auth";
-const dialect = "mysql";
-const pool = {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000
+
+module.exports = {
+    HOST: "localhost",
+    USER: "root",
+    PASSWORD: "Fulerasey@123",
+    DB: "user_auth",
+    dialect: "mysql",
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    }
 };
 
 
