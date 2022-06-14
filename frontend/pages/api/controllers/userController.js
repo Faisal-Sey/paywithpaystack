@@ -1,9 +1,9 @@
-import { user as _user } from "../models"
+import { user } from "../models"
 import { hashPassword, comparePass } from "../utils/passConfig"
 
 
 // create main Model
-const User = _user
+const User = user
 
 
 // create user
